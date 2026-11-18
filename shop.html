@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop — SHILPIKA | Handmade Bengali Wedding Crafts &amp; Gifts</title>
+  <meta name="description" content="Shop handmade gachkouto, kulo, topor, wedding accessories, handicrafts, home décor and gifts from SHILPIKA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=Noto+Serif+Bengali:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="shop">
+  <div id="app-header"></div>
+  <main id="main">
+    <div class="wrap">
+      <div class="phead"><p class="eyebrow" style="justify-content:center">The shop</p><h1 id="shop-title">All <em>pieces</em></h1><p id="shop-sub">Handmade wedding essentials, handicrafts, décor and gifts.</p></div>
+      <div class="shop">
+        <aside class="filters" id="filters" aria-label="Filters">
+          <div class="fclose"><h3>Filters</h3><button class="icon-btn" id="f-close" aria-label="Close filters"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
+          <div class="fgroup"><h4>Category</h4><div id="f-cats"></div></div>
+          <div class="fgroup"><h4>Collection</h4><label class="fopt"><span><input type="checkbox" id="f-wed"> Bengali wedding</span></label></div>
+          <div class="fgroup"><h4>Price (₹)</h4><div class="prange"><input type="number" id="f-min" min="0" placeholder="Min" aria-label="Minimum price" inputmode="numeric"><span>–</span><input type="number" id="f-max" min="0" placeholder="Max" aria-label="Maximum price" inputmode="numeric"></div>
+            <div class="search__chips" id="f-presets" style="margin-top:12px"></div></div>
+          <div class="fgroup"><h4>Availability</h4><label class="fopt"><span><input type="checkbox" id="f-stock"> In stock only</span></label></div>
+          <button class="btn btn--ghost btn--sm" id="f-clear">Clear all filters</button>
+          <div class="fapply"><button class="btn btn--block" id="f-apply">Show results</button></div>
+        </aside>
+        <section aria-label="Products">
+          <div class="toolbar">
+            <div class="toolbar__l"><button class="btn btn--ghost btn--sm fbtn" id="f-open">Filters</button>
+              <div class="sbox"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" id="f-q" placeholder="Search this shop" aria-label="Search products"></div></div>
+            <div style="display:flex;gap:14px;align-items:center"><span class="muted" id="count" aria-live="polite"></span>
+              <label class="sr-only" for="f-sort">Sort by</label>
+              <select class="sel" id="f-sort"><option value="featured">Featured</option><option value="popular">Best sellers</option><option value="newest">New arrivals</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="az">Name: A–Z</option></select></div>
+          </div>
+          <div class="active-f" id="active"></div>
+          <div class="pgrid skels" id="grid"></div>
+          <div class="more" id="more"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <div id="app-footer"></div>
+  <script src="js/data.js"></script><script src="js/art.js"></script><script src="js/store.js"></script><script src="js/ui.js"></script><script src="js/shop.js"></script>
+</body>
+</html>
