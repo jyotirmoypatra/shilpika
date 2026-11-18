@@ -181,3 +181,8 @@
   .wa{width:52px;height:52px;right:12px;bottom:12px}.wa__tip{display:none}
 }
 @media (prefers-reduced-motion:reduce){.announce__t{animation:none}}
+
+.msub{display:flex;flex-wrap:wrap;gap:8px;padding:10px 0 14px;border-bottom:1px dashed var(--line)}
+.msub a{font-size:13px;border:1px solid var(--line);padding:7px 13px;background:#fffaf0;border-radius:99px}
+.mnav a.big:has(+ .msub){border-bottom:0;padding-bottom:4px}
+.mnav .msub+a.big{border-top:0}

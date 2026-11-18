@@ -96,7 +96,7 @@
         </div></div></header>
       <div class="scrim" id="scrim"></div>
       <aside class="mnav" id="mnav" aria-label="Menu"><div class="mnav__top">${logo}<button class="icon-btn" id="menu-close" aria-label="Close menu">${icon('close')}</button></div>
-        ${NAV.map((n) => `<a class="big" href="${n.h}">${n.l}</a>`).join('')}
+        ${NAV.map((n) => `<a class="big" href="${n.h}">${n.l}</a>${n.dd ? `<div class="msub">${n.dd.map(([l, h]) => `<a href="${h}">${esc(l)}</a>`).join('')}</div>` : ''}`).join('')}
         <div class="small"><a href="account.html">My account</a><a href="wishlist.html">Wishlist</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a></div></aside>
       <aside class="drawer" id="drawer" aria-label="Shopping bag" aria-hidden="true">
         <div class="drawer__head"><h2>Your bag</h2><button class="icon-btn" data-cart-close aria-label="Close bag">${icon('close')}</button></div>
@@ -111,7 +111,7 @@
         <div><h4>Shop</h4><ul>${cats.slice(0, 6).map((c) => `<li><a href="shop.html?cat=${c.id}">${esc(c.name)}</a></li>`).join('')}</ul></div>
         <div><h4>Help</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="faq.html">FAQ</a></li><li><a href="policy.html?p=shipping">Shipping policy</a></li><li><a href="policy.html?p=returns">Returns &amp; refunds</a></li><li><a href="account.html#orders">Track an order</a></li></ul></div>
         <div><h4>Shilpika</h4><ul><li><a href="about.html">Our story</a></li><li><a href="policy.html?p=privacy">Privacy policy</a></li><li><a href="policy.html?p=terms">Terms &amp; conditions</a></li><li><a href="admin/index.html">Admin (demo)</a></li></ul></div></div>
-      <div class="ftr__bot"><span>© ${new Date().getFullYear()} SHILPIKA · Handmade with Meaning.</span><span class="demo-pill">Demo storefront · no real orders or payments</span></div></div></footer>`;
+      <div class="ftr__bot"><span>© ${new Date().getFullYear()} SHILPIKA · Handmade with Meaning.</span><span class="demo-pill">Demo storefront · no real orders or payments · build 4</span></div></div></footer>`;
 
     const wa = String(st.whatsapp || '').replace(/\D/g, '');
     $('#app-footer').insertAdjacentHTML('beforeend', `<a class="wa" href="${wa ? 'https://wa.me/' + wa : 'contact.html'}" ${wa ? 'target="_blank" rel="noopener"' : ''} aria-label="Chat with us"><span class="wa__tip"><b>Need help?</b> Ask about custom wedding orders.</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8.5c.2 3.1 2.4 5.6 5.8 6.4l1.2-1.3-2-1-.8.7c-1-.4-1.8-1.2-2.2-2.2l.7-.8-1-2z" fill="#fff"/></svg></a>`);

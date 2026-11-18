@@ -77,9 +77,9 @@ em{font-style:italic;color:var(--terra)}
 /* reveal & transitions (only when JS present) */
 .js .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .js .reveal.in{opacity:1;transform:none}
-main{animation:pagein .45s var(--ease) both}
-body.leaving main{opacity:0;transform:translateY(-6px);transition:opacity .16s,transform .16s}
-@keyframes pagein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+main{animation:pagein .4s ease backwards}
+body.leaving main{opacity:0;transition:opacity .16s}
+@keyframes pagein{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .js .reveal{opacity:1;transform:none}

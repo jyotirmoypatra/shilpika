@@ -1,5 +1,5 @@
 (function () {
-  const { $, esc, money, pcard, skeletons, reveal, qs } = SH, S = SH.store;
+  const { $, $$, esc, money, pcard, skeletons, reveal, qs } = SH, S = SH.store;
   const PAGE = 9;
   const st = { cats: new Set(), wed: false, min: '', max: '', stock: false, q: '', sort: 'featured', shown: PAGE };
   const params = new URLSearchParams(location.search);
@@ -8,12 +8,13 @@
   st.q = params.get('q') || ''; st.sort = params.get('sort') || 'featured';
   const PRESETS = [['Under ₹700', '', 700], ['₹700 – ₹1,500', 700, 1500], ['₹1,500 +', 1500, '']];
 
+  if (matchMedia('(max-width:900px)').matches) $$('#filters details').forEach((d) => (d.open = false));
   const cats = S.categories.all();
   function drawFilters() {
     const all = S.products.all();
     $('#f-cats').innerHTML = cats.map((c) => `<label class="fopt"><span><input type="checkbox" value="${esc(c.id)}" ${st.cats.has(c.id) ? 'checked' : ''}> ${esc(c.name)}</span><small>${all.filter((p) => p.category === c.id).length}</small></label>`).join('');
     $('#f-presets').innerHTML = PRESETS.map(([l, a, b], i) => `<button class="chip" data-pre="${i}" type="button">${l}</button>`).join('');
-    $('#f-wed').checked = st.wed; $('#f-stock').checked = st.stock; $('#f-q').value = st.q; $('#f-sort').value = st.sort;
+    $('#f-wed').checked = st.wed; $('#f-stock').checked = st.stock; $('#f-q').value = st.q; $('#f-sort').value = st.sort; $('#f-sort-m').innerHTML = $('#f-sort').innerHTML; $('#f-sort-m').value = st.sort;
     $('#f-min').value = st.min; $('#f-max').value = st.max;
   }
 
@@ -40,14 +41,14 @@
     if (st.wed) p.set('collection', 'wedding');
     if (st.q) p.set('q', st.q);
     if (st.sort !== 'featured') p.set('sort', st.sort);
-    history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p : ''));
+    try { history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p : '')); } catch (e) { /* file:// pages can't rewrite their URL; filters still work */ }
   }
 
   function render(resetPage) {
     if (resetPage) st.shown = PAGE;
     const list = filtered(), vis = list.slice(0, st.shown);
     $('#grid').classList.remove('skels');
-    $('#count').textContent = `${list.length} piece${list.length === 1 ? '' : 's'}`;
+    $('#count').textContent = `${list.length} piece${list.length === 1 ? '' : 's'}`; $('#f-count').textContent = `${list.length} product${list.length === 1 ? '' : 's'}`; $('#f-apply').textContent = `Apply (${list.length})`;
     $('#grid').innerHTML = list.length ? vis.map(pcard).join('') : '';
     $('#more').innerHTML = !list.length
       ? `<div class="empty"><h3>No pieces match your filters</h3><p class="muted">Try removing a filter or searching for something else.</p><button class="btn btn--ghost" id="reset">Clear all filters</button></div>`
@@ -74,11 +75,12 @@
   $('#f-cats').addEventListener('change', (e) => { e.target.checked ? st.cats.add(e.target.value) : st.cats.delete(e.target.value); render(true); });
   $('#f-wed').onchange = (e) => { st.wed = e.target.checked; render(true); };
   $('#f-stock').onchange = (e) => { st.stock = e.target.checked; render(true); };
-  $('#f-sort').onchange = (e) => { st.sort = e.target.value; render(true); };
+  $('#f-sort').onchange = (e) => { st.sort = e.target.value; $('#f-sort-m').value = st.sort; render(true); };
+  $('#f-sort-m').onchange = (e) => { st.sort = e.target.value; $('#f-sort').value = st.sort; render(true); };
   let qt; $('#f-q').addEventListener('input', (e) => { clearTimeout(qt); qt = setTimeout(() => { st.q = e.target.value; render(true); }, 200); });
   ['min', 'max'].forEach((k) => $('#f-' + k).addEventListener('input', (e) => { st[k] = e.target.value; render(true); }));
   $('#f-presets').addEventListener('click', (e) => { const b = e.target.closest('[data-pre]'); if (!b) return; const [, a, c] = PRESETS[b.dataset.pre]; st.min = a; st.max = c; $('#f-min').value = a; $('#f-max').value = c; render(true); });
-  $('#f-clear').onclick = clearAll;
+  $('#f-clear').onclick = clearAll; $('#f-clear-d').onclick = clearAll;
   $('#more').addEventListener('click', (e) => { if (e.target.id === 'loadmore') { st.shown += PAGE; render(); } if (e.target.id === 'reset') clearAll(); });
   $('#active').addEventListener('click', (e) => {
     const b = e.target.closest('[data-frm]'); if (!b) return; const k = b.dataset.frm;
@@ -86,7 +88,10 @@
     drawFilters(); render(true);
   });
   const f = $('#filters'), sc = $('#scrim');
-  $('#f-open').onclick = () => { f.classList.add('open'); sc.classList.add('show'); };
-  const closeF = () => { f.classList.remove('open'); if (!document.querySelector('.drawer.open,.search.open,.mnav.open')) sc.classList.remove('show'); };
+  const grid = $('.shop'), mq = matchMedia('(max-width:900px)');
+  const place = () => { if (mq.matches) document.body.appendChild(f); else grid.insertBefore(f, grid.firstChild); };
+  place(); (mq.addEventListener ? mq.addEventListener('change', place) : mq.addListener(place));
+  $('#f-open').onclick = () => { f.classList.add('open'); sc.classList.add('show'); document.body.style.overflow = 'hidden'; };
+  const closeF = () => { f.classList.remove('open'); document.body.style.overflow = ''; if (!document.querySelector('.drawer.open,.search.open,.mnav.open')) sc.classList.remove('show'); };
   $('#f-close').onclick = closeF; $('#f-apply').onclick = closeF; sc.addEventListener('click', closeF);
 })();

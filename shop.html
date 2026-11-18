@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shop — SHILPIKA | Handmade Bengali Wedding Crafts &amp; Gifts</title>
   <meta name="description" content="Shop handmade gachkouto, kulo, topor, wedding accessories, handicrafts, home décor and gifts from SHILPIKA.">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=Noto+Serif+Bengali:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/base.css?v=4"><link rel="stylesheet" href="css/components.css?v=4"><link rel="stylesheet" href="css/pages.css?v=4">
 </head>
 <body data-page="shop">
   <div id="app-header"></div>
@@ -14,15 +14,18 @@
     <div class="wrap">
       <div class="phead"><p class="eyebrow" style="justify-content:center">The shop</p><h1 id="shop-title">All <em>pieces</em></h1><p id="shop-sub">Handmade wedding essentials, handicrafts, décor and gifts.</p></div>
       <div class="shop">
-        <aside class="filters" id="filters" aria-label="Filters">
-          <div class="fclose"><h3>Filters</h3><button class="icon-btn" id="f-close" aria-label="Close filters"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
-          <div class="fgroup"><h4>Category</h4><div id="f-cats"></div></div>
-          <div class="fgroup"><h4>Collection</h4><label class="fopt"><span><input type="checkbox" id="f-wed"> Bengali wedding</span></label></div>
-          <div class="fgroup"><h4>Price (₹)</h4><div class="prange"><input type="number" id="f-min" min="0" placeholder="Min" aria-label="Minimum price" inputmode="numeric"><span>–</span><input type="number" id="f-max" min="0" placeholder="Max" aria-label="Maximum price" inputmode="numeric"></div>
-            <div class="search__chips" id="f-presets" style="margin-top:12px"></div></div>
-          <div class="fgroup"><h4>Availability</h4><label class="fopt"><span><input type="checkbox" id="f-stock"> In stock only</span></label></div>
-          <button class="btn btn--ghost btn--sm" id="f-clear">Clear all filters</button>
-          <div class="fapply"><button class="btn btn--block" id="f-apply">Show results</button></div>
+        <aside class="filters" id="filters" aria-label="Filter and sort">
+          <div class="fhead"><div><b>Filter and sort</b><small id="f-count">&nbsp;</small></div><button class="icon-btn" id="f-close" aria-label="Close filters"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
+          <div class="fbody">
+            <details class="fgroup" open><summary>Category</summary><div class="fgroup__b" id="f-cats"></div></details>
+            <details class="fgroup" open><summary>Collection</summary><div class="fgroup__b"><label class="fopt"><span><input type="checkbox" id="f-wed"> Bengali wedding</span></label></div></details>
+            <details class="fgroup" open><summary>Price (₹)</summary><div class="fgroup__b"><div class="prange"><input type="number" id="f-min" min="0" placeholder="Min" aria-label="Minimum price" inputmode="numeric"><span>–</span><input type="number" id="f-max" min="0" placeholder="Max" aria-label="Maximum price" inputmode="numeric"></div>
+              <div class="search__chips" id="f-presets" style="margin-top:12px"></div></div></details>
+            <details class="fgroup" open><summary>Availability</summary><div class="fgroup__b"><label class="fopt"><span><input type="checkbox" id="f-stock"> In stock only</span></label></div></details>
+            <div class="fsort"><label for="f-sort-m">Sort by</label><select class="sel" id="f-sort-m"></select></div>
+            <button class="btn btn--ghost btn--sm fclear-d" id="f-clear-d" type="button">Clear all filters</button>
+          </div>
+          <div class="ffoot"><button class="btn btn--ghost" id="f-clear" type="button">Remove all</button><button class="btn" id="f-apply" type="button">Apply</button></div>
         </aside>
         <section aria-label="Products">
           <div class="toolbar">
@@ -40,6 +43,6 @@
     </div>
   </main>
   <div id="app-footer"></div>
-  <script src="js/data.js"></script><script src="js/art.js"></script><script src="js/store.js"></script><script src="js/ui.js"></script><script src="js/shop.js"></script>
+  <script src="js/data.js?v=4"></script><script src="js/art.js?v=4"></script><script src="js/store.js?v=4"></script><script src="js/ui.js?v=4"></script><script src="js/shop.js?v=4"></script>
 </body>
 </html>
